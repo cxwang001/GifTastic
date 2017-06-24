@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>GifTastic</title>
+  <title>GifTastic</title>
   <style type="text/css">
     button,
     div,
@@ -10,8 +10,8 @@
       margin: 10px;
     }
   </style>
-	
-	<!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
+  
+  <link rel="stylesheet" type="text/css" href="assets/reset.css">
   <link rel="stylesheet" type="text/css" href="assets/style.css">
 </head>
 <body>
@@ -31,9 +31,7 @@
     <div id="animals-view"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
-
     var animals = ["cat", "dog", "angry-panda", "elephant", "baby-animals", "lizard", "frog", "bear", "polar-bear", "monkey",];
-
         function displayAnimals (){
           $("#animals-view").empty();
       var animal = $(this).attr("data-name");
@@ -46,11 +44,8 @@
       for (j=0; j<11;j++) {
           
           var animalDiv = $("<div class='animal'>");
-
           var rating = response.data[j].rating;
-
           var pOne = $("<p>").text("Rating: " + rating);
-
           animalDiv.append(pOne);
           $("#animals-view").append(animalDiv);
          
@@ -59,92 +54,53 @@
           var stillURL = response.data[j].images.original_still.url;
           var animateURL = response.data[j].images.original.url;
           var pTwo = $("<img>").attr("src", stillURL);
-         	pTwo.attr("data-state","still");
-			pTwo.attr("data-still",stillURL);
-			pTwo.attr("data-animate",animateURL);
-          	pTwo.addClass("image");
-
-          	
+          pTwo.attr("data-state","still");
+      pTwo.attr("data-still",stillURL);
+      pTwo.attr("data-animate",animateURL);
+            pTwo.addClass("image");
+            
           imageDiv.append(pTwo);
-
           
           $("#animals-view").append(imageDiv);
         }
-
         });
       $(document).on('click',".image", function(){
-
-		var state = $(this).attr("data-state");
-
-		if(state === "still"){
-			$(this).attr("src", $(this).attr("data-animate"));
-			$(this).attr("data-state", "animate");
-		}else{
-			$(this).attr("src", $(this).attr("data-still"));
-			$(this).attr("data-state", "still");
-		}
-
-
-	});
-    
-
+    var state = $(this).attr("data-state");
+    if(state === "still"){
+      $(this).attr("src", $(this).attr("data-animate"));
+      $(this).attr("data-state", "animate");
+    }else{
+      $(this).attr("src", $(this).attr("data-still"));
+      $(this).attr("data-state", "still");
     }
-
+  });
+    
+    }
     function renderButtons(){
-
       $("#buttons-view").empty();
-
       for (var i = 0; i < animals.length; i++){
         
         var a = $("<button>");
-
         a.addClass("animal");
         a.attr("data-name", animals[i]);
         a.text(animals[i]);
-
         $("#buttons-view").prepend(a);
       }
     }
-
     $("#add-animal").on("click", function(event) {
       event.preventDefault();
-
       var animal = $("#animal-input").val();
-
       animals.push(animal);
       console.log("I am here" + animals);
-
       renderButtons();
     });
-
 $(document).on("click", ".animal", displayAnimals);
-
       // Calling the renderButtons function to display the intial buttons
       renderButtons();
-
-
-
   
-
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
   </script>
-
-<!-- http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=739fbcca0f7e4fd694a10d1708e3f2f2&limit=10 -->
   </div>
 </body>
 </html>
