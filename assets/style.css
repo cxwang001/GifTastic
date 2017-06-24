@@ -1,4 +1,20 @@
-#animal-form{
-	float: fixed;
+#button-view{
+	float: right;
 }
+
+img{
+	
+	height: 200px;
+	width: 200;
+	display: inline-block;
+}
+
+button{
+
+	background-color: #56CBF0;
+	color: #ffffff;
+	/*border-radius: 5px;*/
+	padding:5px;
+  	font-size:15px;
+	
 

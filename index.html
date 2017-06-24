@@ -7,7 +7,7 @@
     div,
     form,
     input {
-      margin: 5px;
+      margin: 10px;
     }
   </style>
 	
@@ -20,7 +20,7 @@
     
     <div id="buttons-view"></div>
 
-    <div id="animals-view"></div>
+
 
     <form id="animal-form">
       <label for="animal-input">Add an animal</label>
@@ -28,13 +28,14 @@
 
       <input id="add-animal" type="submit" value="Add an Animal">
     </form>
-
+    <div id="animals-view"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
 
     var animals = ["cat", "dog", "angry-panda", "elephant", "baby-animals", "lizard", "frog", "bear", "polar-bear", "monkey", "fish"];
 
         function displayAnimals (){
+          $("#animals-view").empty();
       var animal = $(this).attr("data-name");
       var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=739fbcca0f7e4fd694a10d1708e3f2f2&limit=10";
       
@@ -46,11 +47,14 @@
           
           var animalDiv = $("<div class='animal'>");
 
-          var rating = response.data[j].rating;
+          var rating = (response.data[j].rating);
 
           var pOne = $("<p>").text("Rating: " + rating);
 
           animalDiv.append(pOne);
+
+         
+          
 
           var imgURL = response.data[j].images.downsized_still.url;
 
@@ -80,7 +84,7 @@
         a.attr("data-name", animals[i]);
         a.text(animals[i]);
 
-        $("#buttons-view").append(a);
+        $("#buttons-view").prepend(a);
       }
     }
 
