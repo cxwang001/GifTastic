@@ -32,7 +32,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
 
-    var animals = ["cat", "dog", "angry-panda", "elephant", "baby-animals", "lizard", "frog", "bear", "polar-bear", "monkey", "fish"];
+    var animals = ["cat", "dog", "angry-panda", "elephant", "baby-animals", "lizard", "frog", "bear", "polar-bear", "monkey",];
 
         function displayAnimals (){
           $("#animals-view").empty();
@@ -43,31 +43,49 @@
         url: queryURL,
         method: "GET"
       }).done(function(response){
-      for (var j = 0; j < 11; j++) {
+      for (j=0; j<11;j++) {
           
           var animalDiv = $("<div class='animal'>");
 
-          var rating = (response.data[j].rating);
+          var rating = response.data[j].rating;
 
           var pOne = $("<p>").text("Rating: " + rating);
 
           animalDiv.append(pOne);
-
+          $("#animals-view").append(animalDiv);
          
           
+          var imageDiv = $("<div>");
+          var stillURL = response.data[j].images.original_still.url;
+          var animateURL = response.data[j].images.original.url;
+          var pTwo = $("<img>").attr("src", stillURL);
+         	pTwo.attr("data-state","still");
+			pTwo.attr("data-still",stillURL);
+			pTwo.attr("data-animate",animateURL);
+          	pTwo.addClass("image");
 
-          var imgURL = response.data[j].images.downsized_still.url;
+          	
+          imageDiv.append(pTwo);
 
-          var pTwo = $("<img>").attr("src", imgURL);
-
-          animalDiv.append(pTwo);
-
-          $("#animals-view").append(animalDiv);
-
+          
+          $("#animals-view").append(imageDiv);
         }
 
         });
+      $(document).on('click',".image", function(){
 
+		var state = $(this).attr("data-state");
+
+		if(state === "still"){
+			$(this).attr("src", $(this).attr("data-animate"));
+			$(this).attr("data-state", "animate");
+		}else{
+			$(this).attr("src", $(this).attr("data-still"));
+			$(this).attr("data-state", "still");
+		}
+
+
+	});
     
 
     }
