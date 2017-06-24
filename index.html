@@ -2,14 +2,112 @@
 <html>
 <head>
 	<title>GifTastic</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style type="text/css">
+    button,
+    div,
+    form,
+    input {
+      margin: 5px;
+    }
+  </style>
+	
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link rel="stylesheet" type="text/css" href="assets/style.css">
 </head>
 <body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript">
-    // Example queryURL for Giphy API
+
+  <div class="container">
+    
+    <div id="buttons-view"></div>
+
+    <div id="animals-view"></div>
+
+    <form id="animal-form">
+      <label for="animal-input"></label>
+      <input type="text" name="animal-input">
+
+      <input id="add-animal" type="submit" value="Add an Animal">
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    var animals = ["cat", "dog", "angry-panda", "elephant", "baby-animals", "lizard", "frog", "bear", "polar-bear", "monkey", "fish"];
+
+    function renderButtons(){
+
+      $("#buttons-view").empty();
+
+      for (var i = 0; i < animals.length; i++){
+        
+        var a = $("<button>");
+
+        a.addClass("animal");
+        a.attr("data-name", animals[i]);
+        a.text(animals[i]);
+
+        $("#buttons-view").append(a);
+      }
+    }
+
+    $("#add-animal").on("click", function(event) {
+      event.preventDefault();
+
+      var animal = $("#animal-input").val().trim();
+
+      animals.push(animal);
+
+      renderButtons;
+    }
+
+    function displayAnimals (){
+      var animal = $(this).attr("data-name");
+      var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=739fbcca0f7e4fd694a10d1708e3f2f2&limit=10";
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).done(function(response){
+          var animalDiv = $("<div class='animal'>");
+
+          var rating = response.data[1].raing;
+
+          var pOne = $("<p>").text("Rating: " + raing);
+
+          animalDiv.append(pOne);
+
+          var imgURL = response
+
+          var pTwo = $("<img>").attr()
+
+
+
+        )};
+
+
+
+    }
+
+
+    renderButtons();
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     var queryURL = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
 
     $.ajax({
@@ -18,9 +116,10 @@
     }).done(function(response) {
       console.log(response);
     });
+  
   </script>
 
 <!-- http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=739fbcca0f7e4fd694a10d1708e3f2f2&limit=10 -->
-
+  </div>
 </body>
 </html>
