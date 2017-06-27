@@ -11,6 +11,8 @@ $(document).ready(function() {
       var animal = $(this).attr("data-name");
       var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=739fbcca0f7e4fd694a10d1708e3f2f2&limit=10";
       
+      $("#animals-view").empty();
+
       $.ajax({
         url: queryURL,
         method: "GET"
@@ -22,7 +24,7 @@ $(document).ready(function() {
           var rating = response.data[j].rating;
           var pOne = $("<p>").text("Rating: " + rating);
           animalDiv.append(pOne);
-          $("#animals-view").append(animalDiv);
+          $("#animals-view").prepend(animalDiv);
          
           
           var imageDiv = $("<div>");
@@ -36,7 +38,7 @@ $(document).ready(function() {
             
           imageDiv.append(pTwo);
           
-          $("#animals-view").append(imageDiv);
+          $("#animals-view").prepend(imageDiv);
         }
       });
       
@@ -78,7 +80,7 @@ $(document).ready(function() {
       var animal = $("#animal-input").val();
       animals.push(animal);
       
-      console.log("I am here" + animals);
+      // console.log("I am here" + animals);
       renderButtons();
     });
 
