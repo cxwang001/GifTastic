@@ -10,7 +10,7 @@ $(document).ready(function() {
           
       var animal = $(this).attr("data-name");
       console.log(this);
-      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=739fbcca0f7e4fd694a10d1708e3f2f2&limit=10";
+      var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=739fbcca0f7e4fd694a10d1708e3f2f2&limit=10";
       
       $("#animals-view").empty();
 
